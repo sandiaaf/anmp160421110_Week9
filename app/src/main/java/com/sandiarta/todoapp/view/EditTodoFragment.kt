@@ -12,17 +12,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.sandiarta.todoapp.R
 import com.sandiarta.todoapp.databinding.FragmentCreateTodoBinding
+import com.sandiarta.todoapp.databinding.FragmentEditTodoBinding
 import com.sandiarta.todoapp.viewmodel.DetailTodoViewModel
 
-class EditTodoFragment : Fragment() {
-    private lateinit var binding:FragmentCreateTodoBinding
+class EditTodoFragment : Fragment(), RadioClickListener {
+    private lateinit var binding:FragmentEditTodoBinding
     private  lateinit var viewModel: DetailTodoViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentCreateTodoBinding.inflate(inflater,container,false)
+        binding = FragmentEditTodoBinding.inflate(inflater,container,false)
         return binding.root
     }
 
@@ -52,14 +53,16 @@ class EditTodoFragment : Fragment() {
     }
     fun observeViewModel(){
         viewModel.todoLD.observe(viewLifecycleOwner, Observer {
-            binding.txtTitle.setText(it.title)
-            binding.txtNotes.setText(it.title)
+//            binding.txtTitle.setText(it.title)
+//            binding.txtNotes.setText(it.title)
+//
+//            when(it.priority){
+//                1 -> binding.radioButtonLow.isChecked = true
+//                2 -> binding.radioButtonMedium.isChecked = true
+//                else -> binding.radioButtonHigh.isChecked = true
+//            }
 
-            when(it.priority){
-                1 -> binding.radioButtonLow.isChecked = true
-                2 -> binding.radioButtonMedium.isChecked = true
-                else -> binding.radioButtonHigh.isChecked = true
-            }
+            binding.todo = it
         })
 
     }
