@@ -13,9 +13,10 @@ import androidx.navigation.Navigation
 import com.sandiarta.todoapp.R
 import com.sandiarta.todoapp.databinding.FragmentCreateTodoBinding
 import com.sandiarta.todoapp.databinding.FragmentEditTodoBinding
+import com.sandiarta.todoapp.model.Todo
 import com.sandiarta.todoapp.viewmodel.DetailTodoViewModel
 
-class EditTodoFragment : Fragment(), RadioClickListener {
+class EditTodoFragment : Fragment(), RadioClickListener, TodoEditClickListener {
     private lateinit var binding:FragmentEditTodoBinding
     private  lateinit var viewModel: DetailTodoViewModel
     override fun onCreateView(
@@ -49,6 +50,8 @@ class EditTodoFragment : Fragment(), RadioClickListener {
             Toast.makeText(context,"Todo Update", Toast.LENGTH_SHORT).show()
             Navigation.findNavController(it).popBackStack()
         }
+        binding.radioListener = this
+        binding.saveListener = this
         observeViewModel()
     }
     fun observeViewModel(){
@@ -65,5 +68,13 @@ class EditTodoFragment : Fragment(), RadioClickListener {
             binding.todo = it
         })
 
+    }
+
+    override fun onRadioClick(v: View) {
+        binding.todo!!.priority = v.tag.toString().toInt()
+    }
+
+    override fun onTodoEditClick(v: View) {
+        viewModel.updateTodo(binding.todo!!)
     }
 }

@@ -5,7 +5,10 @@
 
     <data>
         <variable
-            name="radiolistener"
+            name="saveListener"
+            type="com.sandiarta.todoapp.view.TodoEditClickListener" />
+        <variable
+            name="radioListener"
             type="com.sandiarta.todoapp.view.RadioClickListener" />
         <variable
             name="todo"
@@ -13,9 +16,7 @@
     </data>
 
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.CreateTodoFragment">
@@ -52,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:onClick="@{(view)->radiolistener.onRadioClick(view,3, todo)}"
+                android:onClick="@{radioListener::onRadioClick}"
                 android:checked="@{todo.priority==3?true:false}"
 
                 android:tag="3"
@@ -63,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:onClick="@{(view)->radiolistener.onRadioClick(view,2, todo)}"
+                android:onClick="@{radioListener::onRadioClick}"
                 android:checked="@{todo.priority==2?true:false}"
 
                 android:tag="2"
@@ -74,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:onClick="@{(view)->radiolistener.onRadioClick(view,1, todo)}"
+                android:onClick="@{radioListener::onRadioClick}"
                 android:checked="@{todo.priority==1?true:false}"
 
                 android:tag="1"
@@ -123,6 +124,7 @@
 
         <Button
             android:id="@+id/btnAdd"
+            android:onClick="@{saveListener::onTodoEditClick}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
